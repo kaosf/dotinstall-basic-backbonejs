@@ -39,6 +39,13 @@ var TaskView = Backbone.View.extend({
 
 var TasksView = Backbone.View.extend({
   tagName: 'ul',
+  initialize: function() {
+    this.collection.on('add', this.addNew, this);
+  },
+  addNew: function(task) {
+    var taskView = new TaskView({model: task});
+    this.$el.append(taskView.render().el);
+  },
   render: function() {
     this.collection.each(function(task) {
       var taskView = new TaskView({model: task});
@@ -74,6 +81,7 @@ var tasks = new Tasks([
 ]);
 
 var tasksView = new TasksView({collection: tasks});
+var addTaskView = new AddTaskView({collection: tasks});
 $('#tasks').html(tasksView.render().el);
 
 })();
