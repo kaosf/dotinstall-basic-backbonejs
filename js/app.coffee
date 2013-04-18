@@ -55,10 +55,9 @@ TasksView = Backbone.View.extend
     uncompletedTasks = @collection.filter (task) -> !(task.get 'completed')
     $('#count').html uncompletedTasks.length
   render: ->
-    @collection.each ((task) ->
-        taskView = new TaskView model: task
-        @$el.append taskView.render().el
-      ), @
+    @collection.each (task) =>
+      taskView = new TaskView model: task
+      @$el.append taskView.render().el
     @updateCount()
     @
 

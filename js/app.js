@@ -80,14 +80,16 @@
       return $('#count').html(uncompletedTasks.length);
     },
     render: function() {
-      this.collection.each((function(task) {
+      var _this = this;
+
+      this.collection.each(function(task) {
         var taskView;
 
         taskView = new TaskView({
           model: task
         });
-        return this.$el.append(taskView.render().el);
-      }), this);
+        return _this.$el.append(taskView.render().el);
+      });
       this.updateCount();
       return this;
     }
